@@ -1,0 +1,13 @@
+version: "3.6"
+
+services:
+
+  scrapyd:
+    image: zwilson/scrapyd
+    build: https://github.com/zazazack/docker-scrapyd
+    env_file: .env
+    volumes:
+      - ./config/scrapyd/scrapyd.conf:/etc/scrapyd/scrapyd.conf
+    ports:
+      - 6800:6800
+    command: scrapyd
