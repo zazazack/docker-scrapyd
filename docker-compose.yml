@@ -4,10 +4,20 @@ services:
 
   scrapyd:
     image: zwilson/scrapyd
-    build: https://github.com/zazazack/docker-scrapyd:develop
+    build: .
     env_file: .env
     volumes:
-      - ./config/scrapyd/scrapyd.conf:/etc/scrapyd/scrapyd.conf
+      - items:/usr/src/items
+    configs:
+      - source: scrapyd.conf
+        target: /etc/scrapyd/scrapyd.conf
     ports:
       - 6800:6800
     command: scrapyd
+
+volumes:
+  items:
+
+configs:
+  scrapyd.conf:
+    external: true

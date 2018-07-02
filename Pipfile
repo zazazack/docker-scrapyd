@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 scrapyd = "*"
+mechanicalsoup = "*"
 
 [dev-packages]
 
