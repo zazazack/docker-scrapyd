@@ -1,0 +1,2 @@
+# docker-scrapyd
+Scrapyd server
