@@ -4,7 +4,7 @@ services:
 
   scrapyd:
     image: zwilson/scrapyd
-    build: https://github.com/zazazack/docker-scrapyd
+    build: https://github.com/zazazack/docker-scrapyd:develop
     env_file: .env
     volumes:
       - ./config/scrapyd/scrapyd.conf:/etc/scrapyd/scrapyd.conf
