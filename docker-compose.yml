@@ -3,7 +3,7 @@ version: "3.6"
 services:
 
   scrapyd:
-    image: zwilson/scrapyd
+    image: zwilson/docker-scrapyd
     build: .
     env_file: .env
     volumes:
@@ -15,9 +15,22 @@ services:
       - 6800:6800
     command: scrapyd
 
+  web:
+    image: nginx
+    ports:
+      - 80:80
+    configs:
+      - source: nginx.conf
+        target: /etc/nginx/nginx.conf
+
 volumes:
+
   items:
 
 configs:
+
   scrapyd.conf:
+    external: true
+
+  nginx.conf:
     external: true
