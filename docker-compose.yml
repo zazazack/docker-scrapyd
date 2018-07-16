@@ -15,22 +15,9 @@ services:
       - 6800:6800
     command: scrapyd
 
-  web:
-    image: nginx
-    ports:
-      - 80:80
-    configs:
-      - source: nginx.conf
-        target: /etc/nginx/nginx.conf
-
 volumes:
-
   items:
 
 configs:
-
   scrapyd.conf:
-    external: true
-
-  nginx.conf:
     external: true
