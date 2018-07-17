@@ -1,4 +1,7 @@
 scrapyd
 scrapy-fake-useragent
 scrapy-splash
+scrapy-deltafetch
 mechanicalsoup
+address
+dateparser

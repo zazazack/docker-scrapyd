@@ -1,23 +1,61 @@
 version: "3.6"
 
 services:
-
   scrapyd:
     image: zwilson/docker-scrapyd
     build: .
     env_file: .env
     volumes:
-      - items:/usr/src/items
+      - scrapyd_data:/usr/src
     configs:
       - source: scrapyd.conf
         target: /etc/scrapyd/scrapyd.conf
-    ports:
-      - 6800:6800
+    depends_on:
+      - splash
     command: scrapyd
+  caddy:
+    image: abiosoft/caddy
+    ports:
+        - 2015:2015
+    volumes:
+      - type: bind
+        source: ./configs/caddy/Caddyfile
+        target: /etc/Caddyfile
+      - type: volume
+        source: caddy
+        target: /root/.caddy
+    # secrets:
+    #   - cert.key
+    #   - cert
+    configs:
+      - source: Caddyfile
+        target: /etc/Caddyfile
+
+  splash:
+    image: scrapinghub/splash
+    expose:
+      - 8050
+  spiderkeeper:
+    image: zwilson/docker-spiderkeeper
+    depends_on:
+      - scrapyd
+    ports:
+      - 5000:5000
+    command: spiderkeeper --verbose --server=http://scrapyd:6800
 
 volumes:
-  items:
+  scrapyd_data:
+  caddy:
 
 configs:
   scrapyd.conf:
     external: true
+  nginx.conf:
+    external: true
+  Caddyfile:
+    external: true
+# secrets:
+#   cert:
+#     external: true
+#   cer.key:
+#     external: true
