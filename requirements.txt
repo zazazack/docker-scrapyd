@@ -3,5 +3,5 @@ scrapy-fake-useragent
 scrapy-splash
 scrapy-deltafetch
 mechanicalsoup
-address
+usaddress
 dateparser
