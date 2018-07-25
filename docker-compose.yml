@@ -9,8 +9,6 @@ services:
     configs:
       - source: scrapyd.conf
         target: /etc/scrapyd/scrapyd.conf
-      - source: scrapy.cfg
-        target: /usr/src/scrapy.cfg
     depends_on:
       - splash
     command: scrapyd
@@ -33,14 +31,3 @@ volumes:
 configs:
   scrapyd.conf:
     external: true
-  scrapy.cfg:
-    external: true
-  nginx.conf:
-    external: true
-  Caddyfile:
-    external: true
-# secrets:
-#   cert:
-#     external: true
-#   cer.key:
-#     external: true
