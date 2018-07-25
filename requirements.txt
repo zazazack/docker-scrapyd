@@ -1,7 +1,8 @@
+dateparser
+mechanicalsoup
 scrapyd
 scrapy-fake-useragent
 scrapy-splash
 scrapy-deltafetch
-mechanicalsoup
+scrapy-magicfields
 usaddress
-dateparser
