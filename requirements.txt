@@ -1,8 +1,1 @@
-dateparser
-mechanicalsoup
 scrapyd
-scrapy-fake-useragent
-scrapy-splash
-scrapy-deltafetch
-scrapy-magicfields
-usaddress

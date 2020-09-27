@@ -1,0 +1,33 @@
+version: "3.8"
+configs:
+  scrapyd.conf:
+    file: ./scrapyd.conf
+volumes:
+  data:
+services:
+  scrapyd:
+    image: zwilson/scrapyd
+    build: .
+    ports:
+      - 6800:6800
+    environment:
+      SPLAH_URL: http://splash
+    volumes:
+      - data:/home/scrapyd/data
+    configs:
+      - source: scrapyd.conf
+        target: /etc/scrapyd/scrapyd.conf
+    entrypoint: scrapyd
+  splash:
+    image: scrapinghub/splash
+  spiderkeeper:
+    image: zwilson/docker-spiderkeeper
+    ports:
+      - 5000:5000
+    command: spiderkeeper --verbose --server=http://scrapyd
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    ports:
+      - 8000:80
+    volumes:
+      - data:/srv/scrapyd
