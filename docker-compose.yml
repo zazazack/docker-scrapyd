@@ -1,33 +1,11 @@
-version: "3.6"
-
+version: "3.8"
 services:
   scrapyd:
-    image: zwilson/docker-scrapyd
+    image: zwilson/scrapyd
     build: .
-    volumes:
-      - items:/usr/src/items
-    configs:
-      - source: scrapyd.conf
-        target: /etc/scrapyd/scrapyd.conf
-    depends_on:
-      - splash
-    command: scrapyd
-  splash:
-    image: scrapinghub/splash
-  spiderkeeper:
-    image: zwilson/docker-spiderkeeper
     ports:
-      - 5000:5000
-    command: spiderkeeper --verbose --server=http://scrapyd:6800
-  filebrowser:
-      image: hacdias/filemanager
-      ports:
-          - 8000:80
-      volumes:
-          - items:/srv
-volumes:
-  items:
-
-configs:
-  scrapyd.conf:
-    external: true
+      - 6800:6800
+    volumes:
+      - ./data:/home/scrapyd/data
+      - ./scrapyd.conf:/home/scrapyd/scrapyd.conf
+    entrypoint: scrapyd
